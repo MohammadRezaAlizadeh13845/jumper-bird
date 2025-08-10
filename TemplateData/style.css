@@ -1,6 +1,10 @@
 body {
+  height: 100%;
   padding: 0;
   margin: 0;
+}
+#content {
+  position: relative;
 }
 #unity-container {
   position: absolute;
@@ -47,30 +51,11 @@ body {
   margin-top: 10px;
   background: url("progress-bar-full-dark.png") no-repeat center;
 }
-#unity-footer {
-  background-color: #1e293b;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
-  text-align: right;
-  height: 80px;
-  width: 300px;
-  position: relative;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  justify-content: center;
-}
+
 .unity-mobile #unity-footer {
   display: none;
 }
-#unity-footer-wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
+
 #unity-build-title {
   float: right;
   margin-right: 10px;
@@ -79,18 +64,13 @@ body {
   font-size: 18px;
 }
 #unity-fullscreen-button {
-  margin-top: 5px;
+  right: 10px;
+  bottom: 0px;
+  position: fixed;
   cursor: pointer;
-  float: right;
   width: 50px;
   height: 60px;
   background: url("fullscreen-button.svg") no-repeat center;
-}
-#unity-fullscreen-button-text {
-  color: rgb(37, 99, 235);
-  margin-right: 10px;
-  font-size: 28px;
-  font-family: "Vazirmatn", sans-serif;
 }
 #unity-warning {
   position: absolute;
@@ -100,4 +80,9 @@ body {
   background: white;
   padding: 10px;
   display: none;
+}
+
+#unity-footer {
+  width: 100px;
+  border-radius: 100%;
 }

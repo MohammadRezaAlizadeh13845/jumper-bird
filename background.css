@@ -12,10 +12,14 @@ body {
   justify-content: center;
   font-size: 14px;
   color: #000;
-  min-height: 100vh;
+  min-height: 105vh;
+  height: 100%;
   background-image: linear-gradient(120deg, rgb(0, 0, 0) 16%, rgb(37, 99, 235));
   background-repeat: no-repeat;
-  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 #particles-js {
@@ -27,4 +31,22 @@ body {
   background-size: cover;
   background-position: 50% 50%;
   z-index: -1;
+}
+
+@media (max-height: 650px) {
+  body {
+    min-height: 120vh;
+  }
+}
+
+@media (max-height: 500px) {
+  body {
+    min-height: 130vh;
+  }
+}
+
+@media (max-height: 430px) {
+  body {
+    min-height: 140vh;
+  }
 }
