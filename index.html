@@ -162,64 +162,24 @@
           .then((unityInstance) => {
             loadingBar.style.display = "none";
             fullscreenButton.onclick = async () => {
-              try {
-                if (container.requestFullscreen) {
-                  await container.requestFullscreen();
-                } else if (container.webkitRequestFullscreen) {
-                  await container.webkitRequestFullscreen();
-                } else if (container.msRequestFullscreen) {
-                  await container.msRequestFullscreen();
-                } else {
-                  alert("Fullscreen not supported");
-                  return;
-                }
+              // Always fullscreen first
+              unityInstance.SetFullscreen(1);
 
-                if (
-                  /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) &&
-                  screen.orientation &&
-                  screen.orientation.lock
-                ) {
-                  try {
+              // Check if mobile device
+              var isMobile = /iPhone|iPad|iPod|Android/i.test(
+                navigator.userAgent
+              );
+
+              if (isMobile) {
+                try {
+                  if (screen.orientation && screen.orientation.lock) {
                     await screen.orientation.lock("landscape");
-                  } catch (err) {
-                    // ignore lock errors
                   }
+                } catch (err) {
+                  // Ignore errors in orientation lock
                 }
-
-                if (unityInstance && unityInstance.SetFullscreen) {
-                  unityInstance.SetFullscreen(1);
-                }
-              } catch (e) {
-                alert("Error entering fullscreen: " + e.message);
               }
             };
-
-            // Listen for fullscreen exit to unlock orientation and notify Unity
-            function onFullscreenChange() {
-              if (
-                !document.fullscreenElement &&
-                !document.webkitFullscreenElement &&
-                !document.msFullscreenElement
-              ) {
-                if (
-                  /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) &&
-                  screen.orientation &&
-                  screen.orientation.unlock
-                ) {
-                  screen.orientation.unlock();
-                }
-                if (unityInstance && unityInstance.SetFullscreen) {
-                  unityInstance.SetFullscreen(0);
-                }
-              }
-            }
-
-            document.addEventListener("fullscreenchange", onFullscreenChange);
-            document.addEventListener(
-              "webkitfullscreenchange",
-              onFullscreenChange
-            );
-            document.addEventListener("msfullscreenchange", onFullscreenChange);
           })
           .catch((message) => {
             alert(message);
